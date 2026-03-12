@@ -1,1 +1,1 @@
-Studying QA Java Tasks (Maven)
+Java Tasks for QA (Maven)
