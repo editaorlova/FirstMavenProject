@@ -63,4 +63,19 @@ public class MySeleniumTest {
 
     driver.quit();
     }
+
+    @Test
+    public void testOnliner() {
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://www.onliner.by/");
+        WebElement button = driver.findElement(By.cssSelector(".auth-bar__item--text"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        button.click();
+
+        WebElement text = driver.findElement(By.cssSelector(".auth-form__title.auth-form__title_big.auth-form__title_condensed-default"));
+        Assert.assertEquals(text.getText(),"Вход");
+
+        driver.quit();
+    }
 }
