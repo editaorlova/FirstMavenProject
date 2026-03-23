@@ -48,7 +48,6 @@ public class MySeleniumTest {
 
         driver.quit();
 
-
     }
 
     @Test
