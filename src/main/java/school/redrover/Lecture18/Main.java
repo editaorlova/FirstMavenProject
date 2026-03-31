@@ -7,14 +7,22 @@ import java.io.PrintWriter;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            System.out.println(makeGrade(5));
-            System.out.println(makeGrade(-12));
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Done");
-
+//        try {
+//            System.out.println("Begin");
+//            System.out.println(new Grade(15));
+//            System.out.println("Success");
+//        } catch (IllegalArgumentException e) {
+//            System.out.println("Error");
+//        }finally {
+//            System.out.println("Done");
+//        }
+//---------------------------------------------
+        BankAccount account = new BankAccount(100);
+        System.out.println("Balance: " + account.getBalance());
+        account.withdraw(50);
+        System.out.println("Balance: " + account.getBalance());
+        account.withdraw(500);
+        System.out.println("Balance: " + account.getBalance());
     }
 
     public  static Grade makeGrade(int grade) {
@@ -22,23 +30,10 @@ public class Main {
     }
 
     public static void writeToFile(String filename, String text) {
-        FileWriter fileWriter = null;
-        try {
-            fileWriter = new FileWriter(filename));
-            fileWriter.write(text);
-        } catch (IOException e) {
-            System.out.println("Error writing to file: " + e.getMessage());
-        } finally {
-            // The finally block always executes, regardless of an exception/
-            if (fileWriter != null) {
-                try {
-                    fileWriter.close();
-                } catch (IOException e) {
-                    System.out.println("Error closing the file: " + e.getMessage());
-                    // This is often considered unrecoverable cleanup, so just report it
-                    e.printStackTrace();
-                }
-            }
-        }
+       try (FileWriter fileWriter = new FileWriter(filename)) {
+           fileWriter.write(text);
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
     }
 }
