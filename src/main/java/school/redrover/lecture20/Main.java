@@ -38,13 +38,35 @@ public class Main {
 
         List<Integer> list = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
         System.out.println(filter(list, new IsEven()));
+
+        System.out.println(filter(list, new FilterExpression<Integer>() {
+            @Override
+            public boolean isOk(Integer element) {
+                return element % 2 != 0;
+            }
+        }));
+
         System.out.println(filter(list, new IsGreaterThan5()));
 
+        List<String> strings = List.of("В", "лесу", "родилась", "елочка");
+        System.out.println(filter(strings, new IsLongerThan5Chars()));
+
+        FilterExpression<String> startsWithR = new FilterExpression<String> () {
+            @Override
+            public boolean isOk(String element) {
+                return element.startsWith("р");
+            }
+        };
+
+        System.out.println(filter(strings, startsWithR));
+        System.out.println(filter(List.of("Я", "памятник", "себе", "воздвиг", "рукотворный"), startsWithR));
     }
 
-    static List<Integer> filter(List<Integer> list, FilterExpression expression) {
-        List<Integer> result = new ArrayList<>();
-        for (Integer integer : list) {
+
+
+    static <T> List<T> filter(List<T> list, FilterExpression expression) {
+        List<T> result = new ArrayList<>();
+        for (T integer : list) {
             boolean isOk = expression.isOk(integer);
             if (isOk) {
                 result.add(integer);
@@ -55,19 +77,27 @@ public class Main {
 
 }
 
-interface FilterExpression {
-    boolean isOk(Integer integer);
+interface FilterExpression <T> {
+    boolean isOk(T element);
 }
 
-class IsEven implements FilterExpression {
+class IsEven implements FilterExpression<Integer> {
     public boolean isOk(Integer integer) {
         return integer % 2 == 0;
     }
 }
 
-class IsGreaterThan5 implements FilterExpression {
+class IsGreaterThan5 implements FilterExpression<Integer> {
     public boolean isOk(Integer integer) {
         return integer > 5;
+    }
+}
+
+class IsLongerThan5Chars implements FilterExpression<String> {
+
+    @Override
+    public boolean isOk(String element) {
+        return element.length() > 5;
     }
 }
 
