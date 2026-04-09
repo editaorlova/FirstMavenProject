@@ -1,10 +1,7 @@
-package school.redrover.lecture20;
+package school.redrover.lecture20.L20_1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static java.util.Collections.swap;
 
 public class Main {
     private String name;
@@ -37,34 +34,34 @@ public class Main {
     public static void main(String[] args) {
 
         List<Integer> list = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
-        System.out.println(filter(list, new IsEven()));
+//        System.out.println(filter(list, new IsEven()));
 
-        System.out.println(filter(list, new FilterExpression<Integer>() {
-            @Override
-            public boolean isOk(Integer element) {
-                return element % 2 != 0;
-            }
-        }));
+        System.out.println(filter(list, element -> element % 2 != 0));
 
-        System.out.println(filter(list, new IsGreaterThan5()));
+        System.out.println(filter(list, i -> i > 5));
 
         List<String> strings = List.of("В", "лесу", "родилась", "елочка");
-        System.out.println(filter(strings, new IsLongerThan5Chars()));
+        System.out.println(filter(strings, a -> a.length() > 5));
 
-        FilterExpression<String> startsWithR = new FilterExpression<String> () {
-            @Override
-            public boolean isOk(String element) {
-                return element.startsWith("р");
-            }
-        };
+        school.redrover.lecture20.L20_2.FilterExpression<String> startsWithR = element -> element.startsWith("р");
 
         System.out.println(filter(strings, startsWithR));
         System.out.println(filter(List.of("Я", "памятник", "себе", "воздвиг", "рукотворный"), startsWithR));
+        System.out.println(filter(strings, s -> s.length() < 5));
+
+        System.out.println(filter(
+                List.of(
+                        new school.redrover.lecture20.L20_2.Student("Ivan Ivanovich"),
+                        new school.redrover.lecture20.L20_2.Student("Ivan Petrovich"),
+                        new school.redrover.lecture20.L20_2.Student("Semen Markovich")
+                ),
+                student -> student.getName().startsWith("Ivan")
+        ));
     }
 
 
 
-    static <T> List<T> filter(List<T> list, FilterExpression expression) {
+    static <T> List<T> filter(List<T> list, school.redrover.lecture20.L20_2.FilterExpression<T> expression) {
         List<T> result = new ArrayList<>();
         for (T integer : list) {
             boolean isOk = expression.isOk(integer);
@@ -81,31 +78,15 @@ interface FilterExpression <T> {
     boolean isOk(T element);
 }
 
-class IsEven implements FilterExpression<Integer> {
-    public boolean isOk(Integer integer) {
-        return integer % 2 == 0;
-    }
-}
-
-class IsGreaterThan5 implements FilterExpression<Integer> {
-    public boolean isOk(Integer integer) {
-        return integer > 5;
-    }
-}
-
-class IsLongerThan5Chars implements FilterExpression<String> {
-
-    @Override
-    public boolean isOk(String element) {
-        return element.length() > 5;
-    }
-}
-
 class Student {
     private final String name;
 
     Student(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
