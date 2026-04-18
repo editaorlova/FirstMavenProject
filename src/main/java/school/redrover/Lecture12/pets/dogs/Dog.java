@@ -1,6 +1,6 @@
-package school.redrover.lecture12.pets.dogs;
+package school.redrover.Lecture12.pets.dogs;
 
-import school.redrover.lecture12.pets.Pet;
+import school.redrover.Lecture12.pets.Pet;
 
 public abstract class Dog extends Pet {
 

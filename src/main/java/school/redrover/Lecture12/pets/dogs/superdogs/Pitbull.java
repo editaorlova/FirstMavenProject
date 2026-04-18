@@ -1,6 +1,6 @@
-package school.redrover.lecture12.pets.dogs.superdogs;
+package school.redrover.Lecture12.pets.dogs.superdogs;
 
-import school.redrover.lecture12.pets.dogs.Dog;
+import school.redrover.Lecture12.pets.dogs.Dog;
 
 public class Pitbull extends Dog {
 

@@ -1,4 +1,4 @@
-package school.redrover.lecture12.pets.dogs;
+package school.redrover.Lecture12.pets.dogs;
 
 public class GermanShepherd extends Dog{
 

@@ -1,4 +1,4 @@
-package school.redrover.lecture20.L20_1;
+package school.redrover.Lecture20.L20_1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class Main {
         List<String> strings = List.of("В", "лесу", "родилась", "елочка");
         System.out.println(filter(strings, a -> a.length() > 5));
 
-        school.redrover.lecture20.L20_2.FilterExpression<String> startsWithR = element -> element.startsWith("р");
+        school.redrover.Lecture20.L20_2.FilterExpression<String> startsWithR = element -> element.startsWith("р");
 
         System.out.println(filter(strings, startsWithR));
         System.out.println(filter(List.of("Я", "памятник", "себе", "воздвиг", "рукотворный"), startsWithR));
@@ -51,9 +51,9 @@ public class Main {
 
         System.out.println(filter(
                 List.of(
-                        new school.redrover.lecture20.L20_2.Student("Ivan Ivanovich"),
-                        new school.redrover.lecture20.L20_2.Student("Ivan Petrovich"),
-                        new school.redrover.lecture20.L20_2.Student("Semen Markovich")
+                        new school.redrover.Lecture20.L20_2.Student("Ivan Ivanovich"),
+                        new school.redrover.Lecture20.L20_2.Student("Ivan Petrovich"),
+                        new school.redrover.Lecture20.L20_2.Student("Semen Markovich")
                 ),
                 student -> student.getName().startsWith("Ivan")
         ));
@@ -61,7 +61,7 @@ public class Main {
 
 
 
-    static <T> List<T> filter(List<T> list, school.redrover.lecture20.L20_2.FilterExpression<T> expression) {
+    static <T> List<T> filter(List<T> list, school.redrover.Lecture20.L20_2.FilterExpression<T> expression) {
         List<T> result = new ArrayList<>();
         for (T integer : list) {
             boolean isOk = expression.isOk(integer);
