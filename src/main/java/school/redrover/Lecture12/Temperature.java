@@ -1,4 +1,4 @@
-package school.redrover.lecture12;
+package school.redrover.Lecture12;
 
 public record Temperature(int degrees, String scale) {
 

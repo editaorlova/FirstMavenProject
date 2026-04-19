@@ -1,6 +1,3 @@
-import org.apache.commons.lang3.StringUtils;
-import school.redrover.lecture12.Temperature;
-
 import java.util.*;
 
 public class Main {

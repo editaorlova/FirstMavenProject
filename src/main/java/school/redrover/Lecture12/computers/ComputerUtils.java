@@ -1,4 +1,4 @@
-package school.redrover.lecture12.computers;
+package school.redrover.Lecture12.computers;
 
 public class ComputerUtils {
 

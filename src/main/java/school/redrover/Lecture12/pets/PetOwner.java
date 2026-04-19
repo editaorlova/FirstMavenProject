@@ -1,7 +1,7 @@
-package school.redrover.lecture12.pets;
+package school.redrover.Lecture12.pets;
 
-import school.redrover.lecture12.pets.dogs.Chihuahua;
-import school.redrover.lecture12.pets.dogs.Dog;
+import school.redrover.Lecture12.pets.dogs.Chihuahua;
+import school.redrover.Lecture12.pets.dogs.Dog;
 
 public class PetOwner {
 

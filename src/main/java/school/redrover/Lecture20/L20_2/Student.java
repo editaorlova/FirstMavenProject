@@ -1,4 +1,4 @@
-package school.redrover.lecture20.L20_2;
+package school.redrover.Lecture20.L20_2;
 
 public class Student {
     private final String name;
