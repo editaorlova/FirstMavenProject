@@ -1,5 +1,6 @@
 package school.redrover.Lecture22;
 
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +59,92 @@ public class Main {
                 List.of("c", "d"),
                 List.of("e")
         );
+        System.out.println(nested);
 
-        System.out.println(nested.stream().flatMap(list -> list.stream()).toList());
+        System.out.println(nested.stream()
+                .flatMap(list -> list.stream())
+                .toList());
+
+        List<List<Integer>> nested1 = List.of(
+                List.of(1, 2),
+                List.of(3, 4),
+                List.of(5)
+        );
+        System.out.println(nested1);
+
+        System.out.println(nested1.stream()
+                .flatMap(list -> list.stream())
+                .filter(integer -> integer % 2 == 0)
+                .toList());
+
+        List<Integer> ints1 = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, -123);
+
+        System.out.println(ints1.stream().anyMatch(i -> i < 0));
+
+        System.out.println(ints1.stream().filter(i -> i < 0).findFirst());
+
+        List<Person> people = List.of(
+                new Person("Alice", 30, "New York"),
+                new Person("Bob", 22, "San Francisco"),
+                new Person("Charlie", 25, "New York"),
+                new Person("Diana", 28, "Boston"),
+                new Person("Eve", 35, "San Francisco")
+        );
+
+        System.out.println(
+                people.stream() //Stream<Person>
+                        .filter(x -> x.getCity().equals("New York")) //STream<Person>
+                        .map(x -> x.getName()) //Stream<String>
+                        .map(name -> name.toUpperCase())
+                        .toList()
+        );
+
+        System.out.println(
+                people.stream()
+                        .filter(x -> x.getCity().equals("San Francisco"))
+                        .count()
+        );
+
+        System.out.println(
+                people.stream() //Stream<Person>
+                        .collect(Collectors.groupingBy(person -> person.getCity()))
+        );
+
+        System.out.println( // Each name in the list
+                people.stream()
+                        .map( person -> person.getCity())
+                        .distinct()
+                        .collect(Collectors.joining(", "))
+        );
+
+        System.out.println(
+                people.stream() //Stream<Person>
+                        .collect(Collectors.partitioningBy( //split list
+                                person -> person.getAge() < 30
+                        ))
+                        .get(false)
+        );
+
+
+        Stream<Integer> numbers = Stream.iterate(0, i -> i + 1) //Create unlimited list of datas
+                .peek(i -> System.out.println(i))
+                .filter(i -> i % 2 == 0)
+//                .skip(10)
+                .limit(20);
+        System.out.println(numbers.toList());
+
+        Stream<Integer> numbers1 = Stream.iterate(0, i -> i + 1) //Create unlimited list of datas
+                .filter(i -> i % 2 == 0)
+                        .takeWhile(i -> i < 100);
+        System.out.println(numbers1.toList());
+
+        List<String> words = List.of(
+                "When", "I", "find", "myself", "in", "times", "of", "trouble,",
+                "Mother", "Mary", "comes", "to", "me"
+        );
+
+        words.stream()
+                .flatMap(word -> CharBuffer.wrap(word.toCharArray()).chars().mapToObj(ch -> (char) ch))
+                .forEach(c -> System.out.println(c));
     }
 }
